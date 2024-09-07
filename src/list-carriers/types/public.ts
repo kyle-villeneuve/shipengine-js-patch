@@ -8,7 +8,7 @@ export type Result = Carrier[];
 /**
  * The carrier object
  */
-interface Carrier {
+export interface Carrier {
   /**
    * The carrier ID
    */

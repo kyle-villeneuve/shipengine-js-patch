@@ -1,21 +1,8 @@
-import {
-  validateAddresses,
-  ValidateAddressesTypes,
-} from "./validate-addresses";
-import { listCarriers, ListCarriersTypes } from "./list-carriers";
-import {
-  voidLabelWithLabelId,
-  VoidLabelWithLabelIdTypes,
-} from "./void-label-with-label-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import {
-  TrackUsingLabelIdTypes,
-  trackUsingLabelId,
-} from "./track-using-label-id";
-import {
-  TrackUsingCarrierCodeAndTrackingNumberTypes,
-  trackUsingCarrierCodeAndTrackingNumber,
-} from "./track-using-carrier-code-and-tracking-number";
+  createLabelFromRate,
+  CreateLabelFromRateTypes,
+} from "./create-label-from-rate";
 import {
   createLabelFromShipmentDetails,
   CreateLabelFromShipmentDetailsTypes,
@@ -24,10 +11,23 @@ import {
   getRatesWithShipmentDetails,
   GetRatesWithShipmentDetailsTypes,
 } from "./get-rates-with-shipment-details";
+import { listCarrier, listCarriers, ListCarriersTypes } from "./list-carriers";
 import {
-  createLabelFromRate,
-  CreateLabelFromRateTypes,
-} from "./create-label-from-rate";
+  trackUsingCarrierCodeAndTrackingNumber,
+  TrackUsingCarrierCodeAndTrackingNumberTypes,
+} from "./track-using-carrier-code-and-tracking-number";
+import {
+  trackUsingLabelId,
+  TrackUsingLabelIdTypes,
+} from "./track-using-label-id";
+import {
+  validateAddresses,
+  ValidateAddressesTypes,
+} from "./validate-addresses";
+import {
+  voidLabelWithLabelId,
+  VoidLabelWithLabelIdTypes,
+} from "./void-label-with-label-id";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -89,6 +89,20 @@ export class ShipEngine {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return listCarriers(mergedConfig);
   }
+
+    /**
+   * Retrieves the carrier accounts that have been connect to your ShipEngine account
+   * using the ShipEngine dashboard.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+    public async listCarrier(
+      carrierId: string,
+      config?: ShipEngineConfig
+    ): Promise<ListCarriersTypes.Carrier | null> {
+      const mergedConfig = NormalizedConfig.merge(this.config, config);
+      return listCarrier(carrierId, mergedConfig);
+    }
 
   /**
    * Tracks a package based on the trackingNumber and carrierCode.

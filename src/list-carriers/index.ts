@@ -1,9 +1,9 @@
 // import { EventEmitter } from "../isomorphic.node";
-import { NormalizedConfig } from "../config";
 import { get } from "../client";
-import * as ListCarriersTypes from "./types/public";
+import { NormalizedConfig } from "../config";
+import { formatCarrier, formatResponse } from "./format-response";
 import { Response } from "./types/private";
-import { formatResponse } from "./format-response";
+import * as ListCarriersTypes from "./types/public";
 
 export { ListCarriersTypes };
 
@@ -22,4 +22,22 @@ export async function listCarriers(
   );
 
   return formatResponse(response);
+}
+
+/**
+ * This function returns a list of a carrier that matches the carrierId specified
+ * along with helpful information about the account, its options, the services it offers, etc.
+ *
+ * https://www.shipengine.com/docs/reference/list-carriers/
+ */
+export async function listCarrier(
+  carrierId: string,
+  config: NormalizedConfig
+): Promise<ListCarriersTypes.Carrier | null> {
+  const response = await get<Response.Carrier>(
+    `/v1/carriers/${carrierId}`,
+    config
+  );
+
+  return response ? formatCarrier(response) : null;
 }

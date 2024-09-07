@@ -11,7 +11,7 @@ export function formatResponse(
   }
 }
 
-function formatCarrier(carrier: Response.Carrier): ListCarriersTypes.Result[0] {
+export function formatCarrier(carrier: Response.Carrier): ListCarriersTypes.Result[0] {
   return {
     carrierId: carrier.carrier_id!, // Error in generated types
     carrierCode: carrier.carrier_code!, // Error in generated types
