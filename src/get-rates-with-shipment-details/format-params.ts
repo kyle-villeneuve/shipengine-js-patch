@@ -235,5 +235,6 @@ function mapCustoms(
     contents: params.contents,
     non_delivery: params.nonDelivery,
     customs_items: custom_items,
+    terms_of_trade_code: params.termsOfTradeCode,
   };
 }

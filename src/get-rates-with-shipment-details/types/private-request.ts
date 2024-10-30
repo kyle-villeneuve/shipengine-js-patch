@@ -40,6 +40,22 @@ export type OrderSourceName =
   | "walmart"
   | "woo_commerce"
   | "volusion";
+export type TermsOfTradeCode =
+  | "exw"
+  | "fca"
+  | "cpt"
+  | "cip"
+  | "dpu"
+  | "dap"
+  | "ddp"
+  | "fas"
+  | "fob"
+  | "cfr"
+  | "cif"
+  | "ddu"
+  | "daf"
+  | "deq"
+  | "des";
 export type TaxableEntityType = "shipper" | "recipient";
 export type IdentifierType =
   | "vat"
@@ -233,6 +249,8 @@ export interface InternationalShipmentOptions {
    * @minItems 0
    */
   customs_items?: CustomsItem[];
+
+  terms_of_trade_code?: TermsOfTradeCode;
 }
 export interface CustomsItem {
   quantity?: number;

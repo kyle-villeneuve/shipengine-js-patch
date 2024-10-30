@@ -152,6 +152,10 @@ interface CustomInfo {
    * Customs declarations for each item in the shipment.
    */
   customsItems?: CustomItem[];
+  /**
+   * Specifies the supported terms of trade code (incoterms).
+   */
+  termsOfTradeCode?: TermsOfTradeCode;
 }
 interface CustomItem {
   /**
@@ -708,4 +712,21 @@ declare type Country =
   | "YE"
   | "ZM"
   | "ZW";
+type TermsOfTradeCode =
+  | "exw"
+  | "fca"
+  | "cpt"
+  | "cip"
+  | "dpu"
+  | "dap"
+  | "ddp"
+  | "fas"
+  | "fob"
+  | "cfr"
+  | "cif"
+  | "ddu"
+  | "daf"
+  | "deq"
+  | "des";
+
 export {};
